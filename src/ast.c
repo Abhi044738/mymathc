@@ -26,7 +26,7 @@ double eval(ASTNode *n) {
       case NODE_EXP:  return exp(eval(n->left));
       case NODE_SQRT: return sqrt(eval(n->left));
     }
-    return 0.0;  /* should never reach */
+    return 0.0;
 }
 
 ASTNode* make_bin(NodeType t, ASTNode *l, ASTNode *r) {

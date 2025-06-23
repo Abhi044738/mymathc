@@ -12,7 +12,6 @@ typedef struct ASTNode {
     struct ASTNode *left, *right;
 } ASTNode;
 
-/* Constructors and destructor */
 ASTNode* make_num(double v);
 ASTNode* make_bin(NodeType t, ASTNode *l, ASTNode *r);
 ASTNode* make_unary(NodeType t, ASTNode *c);

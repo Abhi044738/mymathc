@@ -15,7 +15,7 @@ typedef struct {
     cJSON *tokens;
     ASTNode *ast;
 } Stmt;
-/* Flex buffer API (no header provided by Flex, so declare it yourself) */
+/* Flex buffer API ( provided by Flex ) */
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 extern YY_BUFFER_STATE yy_scan_string(const char *str);
 extern void           yy_delete_buffer(YY_BUFFER_STATE buffer);
@@ -39,7 +39,7 @@ static void generate_ir_for_statement(ASTNode *ast, cJSON *ir_array) {
 /* collect tokens per statement */
 void add_token(const char *type, const char *text) {
     if (stmt_count == 0) {
-        // Create the first statement entry when the first token is encountered
+        // Created the first statement entry when the first token is encountered
         stmt_count++;
         stmts = realloc(stmts, stmt_count * sizeof(*stmts));
         stmts[0].tokens = cJSON_CreateArray();
@@ -51,7 +51,7 @@ void add_token(const char *type, const char *text) {
     cJSON_AddItemToArray(stmts[stmt_count - 1].tokens, tok);
 }
 
-/* collect AST per statement */
+/* collects AST per statement */
 void add_statement(ASTNode *n) {
     if (stmt_count > 0) {
         // Assign the AST to the current statement
@@ -181,9 +181,10 @@ int main(int argc, char **argv) {
         cJSON_AddItemToArray(j_opt, get_opt_json());
 
         /* codegen */
-        init_codegen();
-        cJSON_AddItemToArray(j_code, get_code_json());
-        generate_assembly();
+         init_codegen();
+         generate_assembly();
+         cJSON_AddItemToArray(j_code,cJSON_Duplicate(get_code_json(), 1));
+        
 
 
         free_ast(stmts[i].ast);

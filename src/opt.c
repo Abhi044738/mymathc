@@ -77,8 +77,6 @@ cJSON* get_opt_json() {
         fold_constants(opt, code);
     }
 
-    // Merge optimization errors into the main IR array (optional)
-    // cJSON_AddItemToArray(opt, opt_errors);
     return opt;
 }
 
